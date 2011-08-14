@@ -1,7 +1,7 @@
 // remember to change every instance of "pluginName" to the name of your plugin!
 (function ($) {
 
-	// ECMAScript 5 - http://jqbp.org/pFXhFY
+	// ECMAScript 5 - http://jqbp.org/pFXhFY - http://jqbp.org/rbpnhQ
 	'use strict';
 
 	$.fn.pluginName = function (options) {
