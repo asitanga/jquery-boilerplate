@@ -1,36 +1,48 @@
-// remember to change every instance of "pluginName" to the name of your plugin!
-(function ($) {
+// remember to change every instance of "pluginName" and "pluginNamespace"
+(function($){
 
-	// ECMAScript 5 - http://jqbp.org/pFXhFY - http://jqbp.org/rbpnhQ
-	'use strict';
+    $.pluginName = function(element, options){
 
-	$.fn.pluginName = function (options) {
-
-		// plugin's default options
-		// this is private property and is accessible only from inside the plugin
-		var defaults = {
-			propertyName : 'value'
-		};
-
-		// lets merge options with default settings
-		options = $.extend({}, defaults, options);
-
-		// private function for debugging
-		var debug = function ($obj) {
-			if (window.console && window.console.log) {
-				window.console.log('Debug: ' + $obj);
-			}
-		};
-
-		// maintaining chainability
-		return this.each(function () {
-
-			var $this = $(this);
-
-			// your code here
-
-		});
-
-	};
-
-}(jQuery));
+        // To avoid scope issues, use 'self' instead of 'this'
+        // to reference this class from internal events and functions.
+        var self = this;
+        
+        // Access to jQuery and DOM versions of element
+        self.$element = $(element);
+        self.element = element;
+        
+        // Add a reverse reference to the DOM object
+        self.$element.data('pluginName', self);
+        
+        self.init = function(){
+            self.options = $.extend({}, $.pluginName.defaultOptions, options);
+            
+            // Put your initialization code here
+        };
+        
+        // Sample Function, Uncomment to use
+        // self.functionName = function(paramaters){
+        // 
+        // };
+        
+        // Run initializer
+        self.init();
+    };
+    
+    $.pluginName.defaultOptions = {
+        propertyName: 'value'
+    };
+    
+    $.fn.pluginName = function(options){
+        return this.each(function(){
+            (new $.pluginName(this, options));
+        });
+    };
+    
+    // This function breaks the chain, but returns
+    // the pluginName if it has been attached to the object.
+    $.fn.getpluginName = function(){
+        this.data('pluginName');
+    };
+    
+})(jQuery);
