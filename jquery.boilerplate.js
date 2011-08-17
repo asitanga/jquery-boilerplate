@@ -1,6 +1,11 @@
-// remember to change every instance of "pluginName"
+// Remember to change every instance of "pluginName"
 (function ($) {
 
+
+	// We need attach the plugin to jQuery's namespace or otherwise it would not be
+	// available outside this function's scope
+    // "element" should be a jQuery object or a collection of jQuery objects as returned by
+    // jQuery's selector engine
     $.pluginName = function (element, options) {
 
         // To avoid scope issues, use 'self' instead of 'this'
@@ -30,6 +35,8 @@
 
     };
     
+	// plugin's default options
+	// this is private property and is accessible only from inside the plugin
     $.pluginName.defaultOptions = {
         propertyName: 'value'
     };
